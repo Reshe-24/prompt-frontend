@@ -1,0 +1,407 @@
+:root{
+    --primary-color:#0969da;
+    --primary-hover:#0550ae;
+
+    --danger-color:#cf222e;
+    --danger-hover:#a40e26;
+
+    --success-color:#1a7f37;
+
+    --background:#f6f8fa;
+    --card-background:#ffffff;
+
+    --text-main:#24292f;
+    --text-muted:#57606a;
+
+    --border-color:#d0d7de;
+
+    --shadow:0 1px 3px rgba(27,31,36,.08);
+
+    --border-radius:8px;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--background);
+    color:var(--text-main);
+    padding-bottom:40px;
+}
+
+/* Navbar */
+
+.navbar{
+    background:#24292f;
+    border-bottom:1px solid #30363d;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 1px 3px rgba(27,31,36,.15);
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:64px;
+}
+
+.nav-brand{
+    font-size:20px;
+    font-weight:700;
+    color:white;
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#c9d1d9;
+    font-size:15px;
+    font-weight:500;
+    padding:8px 14px;
+    border-radius:6px;
+    transition:.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    background:#30363d;
+    color:white;
+}
+
+.nav-user{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.user-info{
+    font-size:14px;
+    color:#c9d1d9;
+}
+
+.btn-logout{
+    padding:6px 12px;
+    background:transparent;
+    color:white;
+    border:1px solid #57606a;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn-logout:hover{
+    background:#cf222e;
+    border-color:#cf222e;
+}
+
+.dashboard-container{
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+/* Alerts */
+
+.alert{
+    padding:12px 16px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+.alert-success{
+    background:#dafbe1;
+    color:#1a7f37;
+    border:1px solid #aceebb;
+}
+
+.alert-error{
+    background:#ffebe9;
+    color:#cf222e;
+    border:1px solid #ffcecb;
+}
+
+/* Tabs */
+
+.tabs-header{
+    display:flex;
+    gap:10px;
+    border-bottom:1px solid var(--border-color);
+    margin-bottom:25px;
+}
+
+.tab-btn{
+    padding:10px 20px;
+    background:transparent;
+    border:none;
+    border-bottom:2px solid transparent;
+    font-size:15px;
+    font-weight:600;
+    color:var(--text-muted);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.tab-btn:hover{
+    color:var(--primary-color);
+}
+
+.tab-btn.active{
+    color:var(--primary-color);
+    border-bottom-color:var(--primary-color);
+}
+
+/* Panels */
+
+.tab-panel{
+    display:none;
+    background:white;
+    border:1px solid var(--border-color);
+    border-radius:8px;
+    box-shadow:var(--shadow);
+    padding:24px;
+}
+
+.tab-panel.active{
+    display:block;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.section-header h3{
+    font-size:20px;
+    font-weight:700;
+}
+
+.table-responsive{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:left;
+    font-size:14px;
+}
+
+th,
+td{
+    padding:14px 16px;
+    border-bottom:1px solid var(--border-color);
+}
+
+th{
+    background:#f6f8fa;
+    color:#57606a;
+    font-weight:600;
+}
+
+tr:hover{
+    background:#f6f8fa;
+}
+/* ===========================
+   Buttons
+=========================== */
+
+.btn-primary {
+    padding: 10px 18px;
+    background: #2da44e;
+    color: #ffffff;
+    border: 1px solid #2da44e;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+    box-shadow: 0 1px 2px rgba(27,31,36,.08);
+}
+
+.btn-primary:hover {
+    background: #218bff;
+    border-color: #218bff;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.btn-edit {
+    background: #ddf4ff;
+    color: #0969da;
+    border: 1px solid #b6e3ff;
+    margin-right: 6px;
+}
+
+.btn-edit:hover {
+    background: #0969da;
+    color: #ffffff;
+}
+
+.btn-delete {
+    background: #ffebe9;
+    color: #cf222e;
+    border: 1px solid #ffcecb;
+}
+
+.btn-delete:hover {
+    background: #cf222e;
+    color: #ffffff;
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(27,31,36,.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    padding: 28px;
+    border-radius: 8px;
+    border: 1px solid #d0d7de;
+    box-shadow: 0 8px 24px rgba(27,31,36,.12);
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #57606a;
+    transition: .2s;
+}
+
+.close-modal:hover {
+    color: #24292f;
+}
+
+.modal-content h4 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #24292f;
+}
+
+/* ===========================
+   Forms
+=========================== */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #24292f;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #ffffff;
+    transition: all .2s ease;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: #0969da;
+    box-shadow: 0 0 0 3px rgba(9,105,218,.15);
+}
+
+/* ===========================
+   Disabled
+=========================== */
+
+.admin-only-disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* ===========================
+   Smooth Hover Effects
+=========================== */
+
+.tab-panel,
+.modal-content,
+.btn-primary,
+.btn-edit,
+.btn-delete {
+    transition: all .2s ease;
+}
+
+.tab-panel:hover {
+    box-shadow: 0 8px 20px rgba(27,31,36,.12);
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f6f8fa;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8c959f;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #57606a;
+}

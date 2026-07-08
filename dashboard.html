@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Dashboard - Prompt Management System</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="nav-brand">PromptManager</span>
+            <div class="nav-links">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="users.html" id="nav-users-link">Users</a>
+            </div>
+            <div class="nav-user">
+                <span class="user-info" id="user-info-display">user@example.com (Role)</span>
+                <button class="btn-logout" id="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Layout -->
+    <div class="dashboard-container">
+        
+        <!-- Alerts -->
+        <div id="dashboard-error" class="alert alert-error" style="display: none;"></div>
+        <div id="dashboard-success" class="alert alert-success" style="display: none;"></div>
+
+        <!-- Section Tabs -->
+        <div class="tabs-header">
+            <button class="tab-btn active" data-tab="templates-section">Templates</button>
+            <button class="tab-btn" data-tab="categories-section">Categories</button>
+            <button class="tab-btn" data-tab="collections-section">Collections</button>
+            <button class="tab-btn" data-tab="versions-section">Versions</button>
+        </div>
+
+        <div class="tabs-content">
+            
+            <!-- TEMPLATES SECTION -->
+            <section id="templates-section" class="tab-panel active">
+                <div class="section-header">
+                    <h3>Prompt Templates</h3>
+                    <button class="btn-primary" id="btn-add-template">Add Template</button>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Prompt Text</th>
+                                <th>Status</th>
+                                <th>Category</th>
+                                <th>Created By (User ID)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="templates-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- CATEGORIES SECTION -->
+            <section id="categories-section" class="tab-panel">
+                <div class="section-header">
+                    <h3>Prompt Categories</h3>
+                    <button class="btn-primary admin-only" id="btn-add-category">Add Category</button>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Template Count</th>
+                                <th class="admin-only">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- COLLECTIONS SECTION -->
+            <section id="collections-section" class="tab-panel">
+                <div class="section-header">
+                    <h3>Prompt Collections</h3>
+                    <button class="btn-primary" id="btn-add-collection">Add Collection</button>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>User ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="collections-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- VERSIONS SECTION -->
+            <section id="versions-section" class="tab-panel">
+                <div class="section-header">
+                    <h3>Prompt Versions</h3>
+                    <button class="btn-primary admin-only" id="btn-add-version">Add Version</button>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Version Name</th>
+                                <th>Prompt Text</th>
+                                <th>Template ID</th>
+                                <th class="admin-only">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="versions-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- MODALS FOR CRUD OPERATIONS -->
+
+    <!-- Template Modal -->
+    <div class="modal" id="template-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" id="close-template-modal">&times;</span>
+            <h4 id="template-modal-title">Add Prompt Template</h4>
+            <form id="template-form">
+                <input type="hidden" id="template-id">
+                <div class="form-group">
+                    <label for="template-title">Title</label>
+                    <input type="text" id="template-title" required placeholder="e.g. Chatbot System Prompt">
+                </div>
+                <div class="form-group">
+                    <label for="template-text">Prompt Text</label>
+                    <textarea id="template-text" required placeholder="Enter the prompt instruction template..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="template-status">Status</label>
+                    <select id="template-status">
+                        <option value="DRAFT">DRAFT</option>
+                        <option value="ACTIVE">ACTIVE</option>
+                        <option value="DEPRECATED">DEPRECATED</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="template-category">Category</label>
+                    <select id="template-category">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Save Template</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal" id="category-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" id="close-category-modal">&times;</span>
+            <h4 id="category-modal-title">Add Category</h4>
+            <form id="category-form">
+                <input type="hidden" id="category-id">
+                <div class="form-group">
+                    <label for="category-name">Name</label>
+                    <input type="text" id="category-name" required placeholder="e.g. Code Generation">
+                </div>
+                <div class="form-group">
+                    <label for="category-description">Description</label>
+                    <textarea id="category-description" placeholder="Description of this category..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category-count">Template Count</label>
+                    <input type="number" id="category-count" value="0" min="0">
+                </div>
+                <button type="submit" class="btn-primary">Save Category</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Collection Modal -->
+    <div class="modal" id="collection-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" id="close-collection-modal">&times;</span>
+            <h4 id="collection-modal-title">Add Prompt Collection</h4>
+            <form id="collection-form">
+                <input type="hidden" id="collection-id">
+                <div class="form-group">
+                    <label for="collection-name">Collection Name</label>
+                    <input type="text" id="collection-name" required placeholder="e.g. Writing Tools">
+                </div>
+                <div class="form-group">
+                    <label for="collection-description">Description</label>
+                    <textarea id="collection-description" placeholder="What is this collection for..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Save Collection</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Version Modal -->
+    <div class="modal" id="version-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" id="close-version-modal">&times;</span>
+            <h4 id="version-modal-title">Add Prompt Version</h4>
+            <form id="version-form">
+                <input type="hidden" id="version-id">
+                <div class="form-group">
+                    <label for="version-name">Version Name</label>
+                    <input type="text" id="version-name" required placeholder="e.g. v1.1.0">
+                </div>
+                <div class="form-group">
+                    <label for="version-text">Prompt Text</label>
+                    <textarea id="version-text" required placeholder="Specify modified version prompt text..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="version-template">Parent Template</label>
+                    <select id="version-template" required>
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Save Version</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Core authorization and API logic -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <!-- Page specific logic -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

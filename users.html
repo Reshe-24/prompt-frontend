@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Prompt Management System</title>
+    <link rel="stylesheet" href="css/users.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="nav-brand">PromptManager</span>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="users.html" class="active" id="nav-users-link">Users</a>
+            </div>
+            <div class="nav-user">
+                <span class="user-info" id="user-info-display">user@example.com (Role)</span>
+                <button class="btn-logout" id="btn-logout">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="users-container">
+        
+        <!-- Alerts -->
+        <div id="users-error" class="alert alert-error" style="display: none;"></div>
+        <div id="users-success" class="alert alert-success" style="display: none;"></div>
+
+        <!-- Section Header -->
+        <div class="section-header">
+            <h3>User Management</h3>
+            <button class="btn-primary" id="btn-add-user">Add User</button>
+        </div>
+
+        <!-- Users Table -->
+        <div class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Modal (Create/Edit) -->
+    <div class="modal" id="user-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal" id="close-user-modal">&times;</span>
+            <h4 id="user-modal-title">Add New User</h4>
+            <form id="user-form">
+                <input type="hidden" id="user-id">
+                
+                <div class="form-group">
+                    <label for="user-username">Username</label>
+                    <input type="text" id="user-username" required placeholder="e.g. johndoe">
+                </div>
+
+                <div class="form-group">
+                    <label for="user-email">Email Address</label>
+                    <input type="email" id="user-email" required placeholder="e.g. john@example.com">
+                </div>
+
+                <div class="form-group" id="password-group">
+                    <label for="user-password">Password</label>
+                    <input type="password" id="user-password" placeholder="Enter password">
+                    <small id="password-hint" style="color:var(--text-muted);font-size:12px;display:none;">Leave blank to keep existing password.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-role">Role</label>
+                    <select id="user-role" required>
+                        <option value="PROMPT_COLLECTOR">Prompt Collector</option>
+                        <option value="PROMPT_ENGINEER">Prompt Engineer</option>
+                        <option value="TEAM_LEAD">Team Lead (Admin)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary">Save User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Core authentication and API logic -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <!-- Page specific logic -->
+    <script src="js/users.js"></script>
+</body>
+</html>
